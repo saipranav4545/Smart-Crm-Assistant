@@ -244,8 +244,11 @@ crm_workflow = Workflow(
     ]
 )
 
+root_agent = crm_workflow
+
 # App exposing workflow
 app = App(
     root_agent=crm_workflow,
     name="app",
 )
+
