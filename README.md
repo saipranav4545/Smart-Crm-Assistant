@@ -68,7 +68,7 @@ Launches the ADK 2.0 web-based playground interface:
 make playground
 ```
 Open [http://localhost:18081](http://localhost:18081) 
-https://smart-crm-assistant-180772769937.us-east1.run.app (in case if couldn't open the local host link, it will work) in your browser to interact with the agents.
+https://smart-crm-assistant-180772769937.us-east1.run.app (in case if couldn't open the local host link, open the public link,it will work) in your browser to interact with the agents.
 
 ### 3. Run Production Server
 Starts the FastAPI-based agent runtime server:
