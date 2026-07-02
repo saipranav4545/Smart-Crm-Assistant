@@ -179,8 +179,12 @@ def security_checkpoint(ctx, node_input: str) -> str:
     return scrubbed
 
 @node(rerun_on_resume=True)
-def human_review_node(ctx, lead_classification: str, draft_response: str) -> Any:
+def human_review_node(ctx, lead_classification: str | None = "", draft_response: str | None = "") -> Any:
     """Coordinates the human-in-the-loop review for High Value leads using RequestInput."""
+    # Fallback to state if not bound directly
+    lead_classification = lead_classification or ctx.state.get("lead_classification", "Mid Value")
+    draft_response = draft_response or ctx.state.get("draft_response", "")
+
     interrupt_id = "crm_human_approval"
     user_response = ctx.resume_inputs.get(interrupt_id)
     
@@ -221,9 +225,12 @@ def security_failure(ctx, node_input: str) -> str:
     return f"Failed to process inquiry: {node_input}"
 
 @node
-def rejection_node(ctx, approver_comments: str, draft_response: str) -> str:
+def rejection_node(ctx, approver_comments: str | None = "", draft_response: str | None = "") -> str:
     """Node executed when human review rejects the draft response."""
+    approver_comments = approver_comments or ctx.state.get("approver_comments", "")
+    draft_response = draft_response or ctx.state.get("draft_response", "")
     return f"Draft response was rejected by reviewer with comments: '{approver_comments}'. A new draft should be created."
+
 
 @node
 def final_output(ctx, node_input: str) -> str:
@@ -239,7 +246,7 @@ crm_workflow = Workflow(
         Edge(from_node=security_checkpoint, to_node=crm_orchestrator, route="DEFAULT"),
         Edge(from_node=security_checkpoint, to_node=security_failure, route="SECURITY_EVENT"),
         (crm_orchestrator, human_review_node),
-        Edge(from_node=human_review_node, to_node=final_output),  # Unconditional edge to handle both APPROVED and AUTO_APPROVED routes
+        Edge(from_node=human_review_node, to_node=final_output, route=["APPROVED", "AUTO_APPROVED"]),
         Edge(from_node=human_review_node, to_node=rejection_node, route="REJECTED")
     ]
 )

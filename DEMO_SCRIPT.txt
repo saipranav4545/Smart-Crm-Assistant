@@ -27,7 +27,7 @@ For our first test, we will submit a standard inquiry: (pause)
 Let's submit it. As you see, the Security Checkpoint passes Bob, the Lead Scorer classifies him as a Mid Value lead, the Email Writer drafts a polite response, and the workflow auto-approves it, outputting the draft immediately.
 
 Next, let's submit an enterprise VIP query: (pause)
-"Dear Sales, I am Jane Smith, VP of Infrastructure at Enterprise Corp. We are looking to scale our deployment next quarter and would like to purchase an Enterprise License for 100 seats, including Premium Consulting Support. Please send over a proposal and suggest a time to meet."
+"Dear Sales, I am Jane Smith, VIP of Infrastructure at Enterprise Corp. We are looking to scale our deployment next quarter and would like to purchase an Enterprise License for 100 seats, including Premium Consulting Support. Please send over a proposal and suggest a time to meet."
 (pause)
 Let's run this. The scoring agent queries our custom MCP server, matches Jane to a VIP tier record in the CRM, and classifies her as a High Value lead. The writer drafts a consultative VIP response. Because it is High Value, the workflow halts and displays a review interface. I'll enter 'approve: true' and comments: 'Approved VIP proposal'. When I resume, the workflow finishes and outputs the final VIP draft.
 

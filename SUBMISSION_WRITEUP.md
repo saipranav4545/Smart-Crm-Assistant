@@ -46,15 +46,15 @@ graph TD
 This project leverages the following ADK 2.0 framework components:
 
 * **ADK 2.0 Workflow & Nodes**:
-  Defined in [`app/agent.py`](file:///c:/Users/NEW/OneDrive/Desktop/GCP/capstone%20project/smart-crm-assistant/app/agent.py#L143-L253). The graph defines custom `@node` functions and is wired via the `Workflow` class with typed route edges.
+  Defined in [`app/agent.py`](app/agent.py#L143-L253). The graph defines custom `@node` functions and is wired via the `Workflow` class with typed route edges.
 * **LlmAgent**:
-  We instantiate three separate agents in [`app/agent.py`](file:///c:/Users/NEW/OneDrive/Desktop/GCP/capstone%20project/smart-crm-assistant/app/agent.py#L35-L103): `crm_orchestrator` (the master router), `lead_scoring_agent` (evaluator), and `email_drafting_agent` (writer).
+  We instantiate three separate agents in [`app/agent.py`](app/agent.py#L35-L103): `crm_orchestrator` (the master router), `lead_scoring_agent` (evaluator), and `email_drafting_agent` (writer).
 * **AgentTool**:
-  Used by `crm_orchestrator` to delegate sub-tasks to the scorer and writer agents. Declared in [`app/agent.py`](file:///c:/Users/NEW/OneDrive/Desktop/GCP/capstone%20project/smart-crm-assistant/app/agent.py#L131-L141).
+  Used by `crm_orchestrator` to delegate sub-tasks to the scorer and writer agents. Declared in [`app/agent.py`](app/agent.py#L131-L141).
 * **Model Context Protocol (MCP)**:
-  Implemented in [`app/mcp_server.py`](file:///c:/Users/NEW/OneDrive/Desktop/GCP/capstone%20project/smart-crm-assistant/app/mcp_server.py). The server is run locally via stdio transport and connected to the agents using `McpToolset` in [`app/agent.py`](file:///c:/Users/NEW/OneDrive/Desktop/GCP/capstone%20project/smart-crm-assistant/app/agent.py#L28-L33).
+  Implemented in [`app/mcp_server.py`](app/mcp_server.py). The server is run locally via stdio transport and connected to the agents using `McpToolset` in [`app/agent.py`](app/agent.py#L28-L33).
 * **Security Checkpoint**:
-  Implemented as a workflow function node in [`app/agent.py`](file:///c:/Users/NEW/OneDrive/Desktop/GCP/capstone%20project/smart-crm-assistant/app/agent.py#L143-L191). It runs locally in pure Python before invoking any model calls, ensuring data safety.
+  Implemented as a workflow function node in [`app/agent.py`](app/agent.py#L143-L191). It runs locally in pure Python before invoking any model calls, ensuring data safety.
 * **Agents CLI**:
   Used to scaffold the initial project, manage dependencies (`uv`), run local development environments (`make playground`), and package the application for deployment.
 
